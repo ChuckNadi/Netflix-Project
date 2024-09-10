@@ -1,0 +1,22 @@
+# Filter movies released in the 1990s
+movies_1990s = netflix_df[(netflix_df['release_year'] >= 1990) & (netflix_df['release_year'] < 2000)]
+
+# Find the most frequent movie duration in the 1990s
+most_frequent_duration = movies_1990s['duration'].mode()[0]
+print(f"The most frequent movie duration in the 1990s is: {most_frequent_duration}")
+
+# Count the number of short action movies released in the 1990s
+# Define 'short' as less than 90 minutes
+short_action_movies_count = movies_1990s[
+    (movies_1990s['genre'].str.contains('Action')) & 
+    (movies_1990s['duration'] < 90)
+].shape[0]
+print(f"Number of short action movies released in the 1990s: {short_action_movies_count}")
+
+# Save results as integers
+duration = int(most_frequent_duration)
+short_movie_count = int(short_action_movies_count)
+
+# Optionally, print the results to check
+print(f"Duration (most frequent movie duration): {duration}")
+print(f"Short action movie count: {short_movie_count}")
